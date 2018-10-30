@@ -1,0 +1,30 @@
+### JavaScript template
+.idea
+css
+fonts
+images
+items_example
+js
+js-fb
+stylesheet
+*.png
+/*.js
+*.pdf
+*.iml
+# List of files
+1.html
+2.html
+9.html
+contact.html
+/index.html
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+
+
