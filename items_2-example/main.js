@@ -2,10 +2,14 @@ const ourBtn = document.getElementById("our-btn");
 const ourHeadline = document.getElementById("our-headline"); //const ourHeadline = document.querySelector("#our-headline");
 const ourList = document.getElementById("our-list");
 const listItems = document.getElementById("our-list").getElementsByTagName("li");//const listItems = document.querySelectorAll("#our-list li");
-var newItemCounter = 1;
 const listOfUsers = document.getElementById("users-all-list");
 const userBtnAdd = document.getElementById("add-user-btn");
 const userBtnDelete = document.getElementById("del-user-btn");
+const findByEmailField = document.getElementById("findByEmail-field");
+const resultOfSearch = document.getElementById("results");
+
+
+var newItemCounter = 1;
 
 // const user1 = {
 //     id: 11,
@@ -114,13 +118,16 @@ userMap.push(user2);
 userMap.push(user3);
 userMap.push(user4);
 
+//def user
+const userDef = new User('Testname', 'TestlastName', 'test@gmail.com', 11, "London", scores1);
+
 // задание значений
 // userMap.set(11, user1);
 // userMap.set(12, user2);
 // userMap.set(13, user3);
 // userMap.set(14, user4);
 
-
+/*
 ourList.addEventListener("click",activateItem);
 
 function activateItem(e) {
@@ -133,7 +140,7 @@ function activateItem(e) {
     /*
     or some of other property
     ourHeadline.innerHTML = this.textContent;
-     */
+
     if(e.target.nodeName == "LI") {
         console.log(1 + e);
         ourHeadline.innerHTML = e.target.innerHTML;
@@ -143,11 +150,24 @@ function activateItem(e) {
         e.target.classList.add("active");
     }
 }
+*/
+//TODO after onload component add first test element.
+function generateTestUser(){
+    if(allUsersList.length === 0){
+        allUsersList.push(userDef);
+        addToHtmlUser(userDef, allUsersList, userItem, listOfUsers);
+    }
+}
+
 //Button for adds users.
 userBtnAdd.addEventListener("click", createNewUser);
 
-function createNewUser(){
-    var defaultUser = {name: 'Testname', lastName: 'TestlastName', email: 'test@gmail.com'};
+let allUsersList = [];
+
+function createNewUser() {
+
+    //allUsersList.push(new User)
+    //var defaultUser = {name: 'Testname', lastName: 'TestlastName', email: 'test@gmail.com'};
     const userItem = document.createElement('li');
     let isUserAdded = false;
 
@@ -155,19 +175,33 @@ function createNewUser(){
         if (!user.isUsed) {
             isUserAdded = true;
             user.isUsed = true;
-            // add to dom list
-            // const userItem = document.createElement('li');
-            userItem.innerHTML = fullName(user.name, user.lastName, user.email);
-            listOfUsers.appendChild(userItem);
-            // listOfHtml += htmlUserBuilder(user.name, user.lastName, 'li');
+            addToHtmlUser(user, allUsersList, userItem, listOfUsers);
+            // //let newUser = fullName(user.name, user.lastName, user.email);
+            // // add to dom list
+            // // const userItem = document.createElement('li');
+            // userItem.innerHTML = fullName(user.name, user.lastName, user.email);
+            // listOfUsers.appendChild(userItem);
+            // // listOfHtml += htmlUserBuilder(user.name, user.lastName, 'li');
+            // allUsersList.push(user);
+
             break;
         }
-        if (!isUserAdded) {
-            userItem.innerHTML = fullName(defaultUser.name, defaultUser.lastName, defaultUser.email);
-            listOfUsers.appendChild(userItem);
-        }
     }
+    if (!isUserAdded) {
+        // //let newDefUser = fullName(defaultUser.name, defaultUser.lastName, defaultUser.email);
+        // userItem.innerHTML = fullName(userDef.name, userDef.lastName, userDef.email);
+        // allUsersList.push(userDef);
+        // listOfUsers.appendChild(userItem);
+        addToHtmlUser(userDef, allUsersList, userItem, listOfUsers);
+    }
+    console.log(allUsersList);
+}
 
+function addToHtmlUser(user,list,item, listItem){
+    item.innerHTML = fullName(user.name, user.lastName, user.email);
+    list.push(user);
+    listItem.appendChild(item);
+}
     // if (!isUserAdded) {
     //     listOfHtml += htmlUserBuilder(defaultUser.name, defaultUser.lastName, 'li');
     // }
@@ -200,7 +234,7 @@ function createNewUser(){
     // } else {
     //     listOfHtml += htmlUserBuilder (defaultUser.name, defaultUser.lastName, 'li');
     // }
-}
+//}
 //
 // function getMapElements(value, key, map) {
 //     //console.log("m[" + key + "] = " + value);
@@ -239,6 +273,37 @@ function deleteUser() {
     selectItem.remove();
 }
 
+let allUsersList2 = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler'];
+
+findByEmailField.addEventListener('input', e=>renderResultList(findByEmail(e.target.value, allUsersList), resultOfSearch))
+
+//findByEmailField.addEventListener('input', findByEmail);
+
+
+
+function findByEmail(val, list){
+    //findByEmailField
+    // let result=[];
+   //return list.filter(i=>(~i.indexOf(val)));
+    // result.push(list.filter(i=>(~i.indexOf(e.target.value))));
+    // renderResultList(result, resultOfSearch);
+    // let result=[];
+    // list.forEach(function (result, i) {
+    //     (i.email === val) && result.push(i.value);
+    // })
+    // return result;
+    return list.filter(i => (~(i.email).indexOf(val.toLowerCase())));
+}
+
+function renderResultList(_list=[],el=document.body){
+    el.innerHTML='';
+    _list.forEach(i=>{
+        let new_el = document.createElement('li');
+        new_el.innerHTML=i.email;
+        el.appendChild(new_el);
+    })
+}
+
 
 
 function fullName(name, lastName, email){
@@ -261,9 +326,6 @@ function createNewItem() {
 function htmlStringBuilder(str, tag) {
     return `<${tag}>${str}</${tag}>`;
 }
-
-
-
 
 
 
