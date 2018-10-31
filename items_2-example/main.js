@@ -8,6 +8,8 @@ const userBtnDelete = document.getElementById("del-user-btn");
 const findByEmailField = document.getElementById("findByEmail-field");
 const resultOfSearch = document.getElementById("results");
 
+//прочитать - JSON.parse(JSON.stringify(user2));
+
 
 var newItemCounter = 1;
 
@@ -151,18 +153,22 @@ function activateItem(e) {
     }
 }
 */
+let allUsersList = [];
+
+document.addEventListener('DOMContentLoaded', generateTestUser);
 //TODO after onload component add first test element.
 function generateTestUser(){
-    if(allUsersList.length === 0){
-        allUsersList.push(userDef);
+    const userItem = document.createElement('li');
+    if(allUsersList.length == 0){
         addToHtmlUser(userDef, allUsersList, userItem, listOfUsers);
     }
+    console.log(allUsersList);
 }
 
 //Button for adds users.
 userBtnAdd.addEventListener("click", createNewUser);
 
-let allUsersList = [];
+
 
 function createNewUser() {
 
@@ -266,11 +272,13 @@ function selectUser(e){
         }
         targetItem.classList.add("active");
         selectItem = targetItem;
+        console.log(selectItem + '19');
     }
 }
 
 function deleteUser() {
     selectItem.remove();
+    //allUsersList
 }
 
 let allUsersList2 = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler'];
@@ -287,23 +295,36 @@ function findByEmail(val, list){
    //return list.filter(i=>(~i.indexOf(val)));
     // result.push(list.filter(i=>(~i.indexOf(e.target.value))));
     // renderResultList(result, resultOfSearch);
-    // let result=[];
-    // list.forEach(function (result, i) {
-    //     (i.email === val) && result.push(i.value);
-    // })
-    // return result;
+    //  let result=[];
+    //  list.filter(i => {
+    //      if (~(i.email).indexOf(val.toLowerCase()))
+    //          result.push(i);
+    //  })
+    //  return result;
     return list.filter(i => (~(i.email).indexOf(val.toLowerCase())));
 }
 
-function renderResultList(_list=[],el=document.body){
-    el.innerHTML='';
-    _list.forEach(i=>{
-        let new_el = document.createElement('li');
-        new_el.innerHTML=i.email;
-        el.appendChild(new_el);
-    })
+function renderResultList(_list=[],el=document.body) {
+    el.innerHTML = '';
+    //console.log(_list.length);
+    if (_list.length > 0) {
+        _list.forEach(i => {
+            let new_el = document.createElement('li');
+            new_el.innerHTML = i.email;
+            el.appendChild(new_el);
+        });
+    }
+    else {
+        createNotFoundMessage();
+        console.log(_list.length);
+    }
 }
 
+function createNotFoundMessage() {
+    let elem = document.createElement('li');
+    elem.innerHTML = 'Sorry, this email is not found!';
+    resultOfSearch.appendChild(elem);
+}
 
 
 function fullName(name, lastName, email){
