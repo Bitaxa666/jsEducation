@@ -1,3 +1,10 @@
+
+//https://javascript.ru/forum/jquery/22927-poluchit-nomer-v-spiske-pri-sobytii.html
+/* https://learn.javascript.ru/array-methods
+ * https://www.youtube.com/watch?v=zPHerhks2Vg&t=520s
+ * https://habr.com/post/342922/
+ */
+
 const ourBtn = document.getElementById("our-btn");
 const ourHeadline = document.getElementById("our-headline"); //const ourHeadline = document.querySelector("#our-headline");
 const ourList = document.getElementById("our-list");
@@ -7,6 +14,14 @@ const userBtnAdd = document.getElementById("add-user-btn");
 const userBtnDelete = document.getElementById("del-user-btn");
 const findByEmailField = document.getElementById("findByEmail-field");
 const resultOfSearch = document.getElementById("results");
+
+
+
+const submitForm = document.getElementById("sign-in");
+const formName = document.getElementById("valid-name");
+const formEmail = document.getElementById("valid-email");
+const validBtn = document.getElementById("check-validation");
+const validationBlock = document.getElementById("demo");
 
 //прочитать - JSON.parse(JSON.stringify(user2));
 
@@ -262,26 +277,33 @@ function addToHtmlUser(user,list,item, listItem){
 listOfUsers.addEventListener("click", selectUser);
 userBtnDelete.addEventListener("click", deleteUser);
 let selectItem = null;
+let deleteIndex = null;
 
 function selectUser(e){
     const targetItem = e.target;
+    const targetChildrenItem = targetItem.parentNode.children;
     if(targetItem.nodeName == "LI") {
         ourHeadline.innerHTML = targetItem.innerHTML;
-        for(let i = 0; i < targetItem.parentNode.children.length; i++){
-            targetItem.parentNode.children[i].classList.remove("active");
+        for(let i = 0; i < targetChildrenItem.length; i++){
+            targetChildrenItem[i].classList.remove("active");
+            if(targetChildrenItem[i] == targetItem){
+                targetItem.classList.add("active");
+                deleteIndex = i;
+                continue;
+            }
         }
-        targetItem.classList.add("active");
         selectItem = targetItem;
-        console.log(selectItem + '19');
     }
 }
 
 function deleteUser() {
+    const one = 1; //length of deleted elements -> if 1, delete only 1 elements
     selectItem.remove();
-    //allUsersList
+    allUsersList.splice(deleteIndex, one);
+    deleteIndex = null;
 }
 
-let allUsersList2 = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler'];
+//let allUsersList2 = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler'];
 
 findByEmailField.addEventListener('input', e=>renderResultList(findByEmail(e.target.value, allUsersList), resultOfSearch))
 
@@ -348,71 +370,26 @@ function htmlStringBuilder(str, tag) {
     return `<${tag}>${str}</${tag}>`;
 }
 
+validBtn.addEventListener('click', checkValidation);
 
+function checkValidation() {
+    //let checkMessageItem = document.createElement('p');
+    const name = formName.value;
+    const email = 'boby@gmail.com';
+    const emailIncorrect = 'boby@gmai@l.com';
+    let text = '';
+    //validationBlock.removeChild(checkMessageItem);
 
+    // If x is Not a Number or less than one or greater than 10
+    if (isNaN(name) || name < 1 || name > 10) {
+        text = "Input not valid";
+    } else {
+        text = "Input OK";
+    }
+    validationBlock.innerHTML = text;
 
-/*
-* https://habr.com/post/342922/
-* Генерация данных в списке
-* На данном этапе код выглядит примерно так:
-* let list = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler']
- const result = document.getElementById('results')
- renderList(list,result)
- function renderList(_list=[],el=document.body){
- _list.forEach(i=>{
- let new_el = document.createElement('li')
- new_el.innerHTML=i
- el.appendChild(new_el)
- })
- }
- Фильтруем значения и все вместе
- let list = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler']
- const result = document.getElementById('results')
- renderList(list,result)
- function filter(val,list){
- let result=[];
- list.forEach(i=>{
- if(i.indexOf(val)!=-1)
- result.push(i)
- })
- return result;
- }
- function renderList(_list=[],el=document.body){
- _list.forEach(i=>{
- let new_el = document.createElement('li')
- new_el.innerHTML=i
- el.appendChild(new_el)
- })
- }
- document.getElementById('search').addEventListener('input',e=>{
- let new_arr = filter(e.target.value,list)
- renderList(new_arr,result)
- })
+}
 
- Перепишем -
- function filter(val,list){
- console.time('test')
- return list.filter(i=>(~i.indexOf(val)))
- };
-
- *******
- * Перепишим краСиво
- * let list = ['JavaScript','Kotlin','Rust','PHP','Ruby','Java','MarkDown','Python','C++','Fortran','Assembler']
- const result = document.getElementById('results')
- renderList(list,result)
- function filter(val,list){
- console.time('test')
- return list.filter(i=>(~i.indexOf(val)))
- };
- function renderList(_list=[],el=document.body){
- el.innerHTML='';
- _list.forEach(i=>{
- let new_el = document.createElement('li')
- new_el.innerHTML=i
- el.appendChild(new_el)
- })
- console.timeEnd('test')
- }
- document.getElementById('search').addEventListener('input',e=>renderList(filter(e.target.value,list),result))
-
-* */
+// //const submitForm = document.getElementById("sign-in");
+// const formName = document.getElementById("valid-name");
+// const formEmail = document.getElementById("valid-email");

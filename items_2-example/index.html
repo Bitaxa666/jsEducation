@@ -26,7 +26,6 @@
 	<button id = "add-user-btn">Add New User</button>
 	<button id = "del-user-btn">Delete User</button>
 	<ul id = "users-all-list">
-		<li>Test User1</li>
 	</ul>
     <div id="findByEmail">
         Enter email to search: <br>
@@ -35,6 +34,22 @@
         <ul id="results">
         </ul>
     </div>
+</div>
+
+<div class="validation-example" id="valid-ex">
+    <h1 id="validation-headline">Validation form example.</h1>
+    <form id="sign-in">
+        First name:<br>
+        <input id="valid-name" type="text" name="firstname" placeholder="Your name...">
+        <br>
+        Email:<br>
+        <!--<input id="valid-email" type="text" name="email" placeholder="Your correct email..." required>-->
+        <input id="valid-email" type="text" name="email" placeholder="Your correct email...">
+        <br><br>
+        <button type="button" id="check-validation">Check
+        </button>
+    </form>
+    <p id="demo"></p>
 </div>
 </div>
 <div id="footer">
