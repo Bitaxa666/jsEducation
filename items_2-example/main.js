@@ -375,17 +375,26 @@ validBtn.addEventListener('click', checkValidation);
 function checkValidation() {
     //let checkMessageItem = document.createElement('p');
     const name = formName.value;
-    const email = 'boby@gmail.com';
+    const email = formEmail.value;
     const emailIncorrect = 'boby@gmai@l.com';
     let text = '';
-    //validationBlock.removeChild(checkMessageItem);
 
-    // If x is Not a Number or less than one or greater than 10
-    if (isNaN(name) || name < 1 || name > 10) {
-        text = "Input not valid";
+    let atpos = email.indexOf("@");
+    let dotpos = email.lastIndexOf(".");
+
+    if (atpos < 1 || ( dotpos - atpos < 2 ) && email !='')
+    {
+        text = "Please enter correct email";
     } else {
         text = "Input OK";
     }
+
+    // // If x is Not a Number or less than one or greater than 10
+    // if (isNaN(name) || name < 1 || name > 10) {
+    //     text = "Input not valid";
+    // } else {
+    //     text = "Input OK";
+    // }
     validationBlock.innerHTML = text;
 
 }
