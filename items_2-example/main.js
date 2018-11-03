@@ -382,13 +382,41 @@ function checkValidation() {
     let atpos = email.indexOf("@");
     let dotpos = email.lastIndexOf(".");
 
-    if (atpos < 1 || ( dotpos - atpos < 2 ) && email !='')
-    {
-        text = "Please enter correct email";
-    } else {
-        text = "Input OK";
-    }
 
+    //check the beginning of email
+    let regBegin = /^([A-Za-z0-9_\-\.])/
+    //middle part of email
+    let regMiddle = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)/;
+    //check the end of email.
+    let regEnd = /\.([A-Za-z]{2,4})$/;
+
+    //test middle part.....Потому что мидл парт проверяет заново и начало
+    /*
+    checkValidation('-123_dsadas@dafdfs.a');
+VM5624:17 Incorrect middle part.You added incorrect symbols. Try again, please
+    */
+    switch(true){
+        case(!regBegin.test(email)):
+            return console.log ("Incorrect first simbol in your email. Try again, please!");
+        case(!regMiddle.test(email)):
+            return console.log ("Incorrect middle part.You added incorrect symbols. Try again, please!");
+        case(!regEnd.test(email)):
+            return console.log ("You have more or less symbols at the end part of email(2-4 symbols). Try again, please!");
+        case (email.indexOf('@') <= 0):
+            if (email.indexOf('.') <= 0) return console.log("Your email does not contain '@' and '.' " + email);
+                return console.log("Your email does not contain @ " + email);
+        case ((email.split('@')).length > 2):
+            return console.log("Your email contains more then one '@' " + email);
+        case (email.indexOf('.') <= 0):
+                if (email.indexOf('@') <= 0) return console.log("Your email does not contain '.' and '@' " + email);
+                return console.log("Your email does not contain '.' " + email);
+        case (email.indexOf(' ') >= 0):
+            return console.log("Your email contains ' ', check it " + email);
+        case (atpos < 1 || ( dotpos - atpos < 2 )):
+            return console.log("Enter correct email. Try again, please!" + email);
+        default:
+                return console.log("Input OK...Correct email: " + email);
+    }
     // // If x is Not a Number or less than one or greater than 10
     // if (isNaN(name) || name < 1 || name > 10) {
     //     text = "Input not valid";
