@@ -120,7 +120,7 @@ function User(name, lastName, email, year, city, scores, isUsed = false) {
 //Create new Map of Users;
 //let userMap = new Map();
 // var userMap = new Map();
-var userMap = [];
+// var userMap = [];
 
 const scores1 = new Scores(54, 83, 95);
 const scores2 = new Scores(72, 61, 91);
@@ -375,8 +375,7 @@ validBtn.addEventListener('click', checkValidation);
 function checkValidation() {
     //let checkMessageItem = document.createElement('p');
     const name = formName.value;
-    const email = formEmail.value;
-    const emailIncorrect = 'boby@gmai@l.com';
+    const email = formEmail.value;   
     let text = '';
 
     let atpos = email.indexOf("@");
@@ -389,33 +388,50 @@ function checkValidation() {
     let regMiddle = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)/;
     //check the end of email.
     let regEnd = /\.([A-Za-z]{2,4})$/;
-
-    //test middle part.....Потому что мидл парт проверяет заново и начало
-    /*
-    checkValidation('-123_dsadas@dafdfs.a');
-VM5624:17 Incorrect middle part.You added incorrect symbols. Try again, please
-    */
+    
     switch(true){
         case(!regBegin.test(email)):
+            text = 'Incorrect first simbol in your email. Try again, please!';
             return console.log ("Incorrect first simbol in your email. Try again, please!");
         case(!regMiddle.test(email)):
-            return console.log ("Incorrect middle part.You added incorrect symbols. Try again, please!");
+            if(!regBegin.test(email)) {
+                text = 'Incorrect first simbol in your email. Try again, please!';
+                return console.log ("Incorrect first simbol in your email. Try again, please!");
+            } else {
+                text = 'Incorrect middle part (before "@" and in domain part.).You added incorrect symbols. Try again, please!';
+                return console.log ("Incorrect middle part (before '@' and in domain part.).You added incorrect symbols. Try again, please!");
+            }
         case(!regEnd.test(email)):
+            text = 'You have more or less symbols at the end part of email(2-4 symbols). Try again, please!';
             return console.log ("You have more or less symbols at the end part of email(2-4 symbols). Try again, please!");
         case (email.indexOf('@') <= 0):
-            if (email.indexOf('.') <= 0) return console.log("Your email does not contain '@' and '.' " + email);
+            if (email.indexOf('.') <= 0){
+                text = 'Your email does not contain "@" and "."';
+                return console.log("Your email does not contain '@' and '.' " + email);
+            } else {
+                text = 'Your email does not contain @';
                 return console.log("Your email does not contain @ " + email);
+            }
         case ((email.split('@')).length > 2):
+            text = 'Your email contains more then one "@"';
             return console.log("Your email contains more then one '@' " + email);
         case (email.indexOf('.') <= 0):
-                if (email.indexOf('@') <= 0) return console.log("Your email does not contain '.' and '@' " + email);
+            if (email.indexOf('@') <= 0){
+                text = 'Your email does not contain "." and "@"';
+                return console.log("Your email does not contain '.' and '@' " + email);
+            } else {
+                text = 'Your email does not contain "." ';
                 return console.log("Your email does not contain '.' " + email);
+            }                
         case (email.indexOf(' ') >= 0):
+            text = 'Your email contains " ", check it ';
             return console.log("Your email contains ' ', check it " + email);
         case (atpos < 1 || ( dotpos - atpos < 2 )):
-            return console.log("Enter correct email. Try again, please!" + email);
+            text = 'Incorrect email!';
+            return console.log("Input OK...Your email is correct!" + email);
         default:
-                return console.log("Input OK...Correct email: " + email);
+             text = 'Input OK...Your email is correct!';
+            return console.log("Input OK...Your email is correct! " + email);
     }
     // // If x is Not a Number or less than one or greater than 10
     // if (isNaN(name) || name < 1 || name > 10) {
@@ -426,6 +442,7 @@ VM5624:17 Incorrect middle part.You added incorrect symbols. Try again, please
     validationBlock.innerHTML = text;
 
 }
+
 
 // //const submitForm = document.getElementById("sign-in");
 // const formName = document.getElementById("valid-name");
