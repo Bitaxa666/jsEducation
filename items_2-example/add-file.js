@@ -1,6 +1,8 @@
 const myBtnClass = document.querySelector(".my");
 const file = document.querySelector("#myfile");
 
+//for preview
+//let inputPreview = document.getElementById("img-test");
 // $('.my').change(function() {
 //     if ($(this).val() != '') $(this).prev().text('Выбрано файлов: ' + $(this)[0].files.length);
 //     else $(this).prev().text('Выберите файлы');
@@ -22,7 +24,7 @@ const file = document.querySelector("#myfile");
 // http://qaru.site/questions/11050/preview-an-image-before-it-is-uploaded
 // 
 
-myBtnClass.addEventListener("change", addImage);
+// myBtnClass.addEventListener("change", addImage);
 
 
 function addImage(e){
@@ -35,4 +37,23 @@ function addImage(e){
         console.log(file.files[i].name);
         console.log(file.files[i].src + 2);
     }
+}
+let inputBtn = document.getElementById("input-test-prev");
+
+inputBtn.addEventListener("change", addOnlyImage);
+
+function addOnlyImage(){  
+	let inputPreview = document.getElementById("img-test");  
+    const fileReader = inputBtn.files[0];
+    var reader  = new FileReader();
+
+    reader.onloadend = function () {
+    inputPreview.src = reader.result;
+  	}
+
+  	if (fileReader) {
+	    reader.readAsDataURL(fileReader);	   
+	  } else {
+	    inputPreview.src = "";
+	}   
 }

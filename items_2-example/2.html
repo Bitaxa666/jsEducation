@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=l. 0 ">
+    <title>JS an hour</title>
+    <link rel="stylesheet" type="text/css" href="styleLi.css">
+</head>
+<body>
+	<div id="slider-header">
+	    <h1 id="our-headline">Example JS. You can adds new items into slider</h1>
+	    <br> 
+	    <div class="dada">
+	    	<label for="myfile" class="chous">Выберите файлы</label>
+			<input type="file" class="my" id="myfile" name="myfile" multiple="multiple"/>	     	    
+		</div>
+	    <!-- <ul id = "slider-list">
+	        <li>First item</li>
+	        <li>Second item</li>
+	        <li>Third item</li>
+	    </ul> -->
+	</div>
+
+    <script src="add-file.js"></script>
+</body>
+</html>
+
+<!-- 
+Может возникнуть проблема с вёрсткой, какая была и у меня. А проблема может заключаться с этим пресловутым .prev(). По факту, есть вероятность того, что невозможно расположить label и input file рядом друг с другом, и текст «Выбрано файлов» будет применяется не к label, а к левому элементу. 
+
+Эту проблему можно решить вот так: 
+
+Поместите label и input в один div, и дайте этому div'у класс, к примеру «box-form»
+
+<div class="box-form">
+<p>Текст какой-то</p>
+<div>
+<label for="myfile" class="label">Выберите файлы</label>
+</div>
+<div>
+<div></div>
+<input type="file" class="my" id="myfile" name="myfile" multiple>
+</div>
+</div> 
+И замените в js 
+
+$(this).prev() 
+
+на 
+
+$(this).closest('.box-form').children('.label')
+
+-->
