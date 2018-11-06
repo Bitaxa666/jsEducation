@@ -2,31 +2,6 @@ const myBtnClass = document.querySelector(".my");
 const file = document.querySelector("#myfile");
 
 //for preview
-//let inputPreview = document.getElementById("img-test");
-// $('.my').change(function() {
-//     if ($(this).val() != '') $(this).prev().text('Выбрано файлов: ' + $(this)[0].files.length);
-//     else $(this).prev().text('Выберите файлы');
-// });
-// const targetItem = e.target;
-//     const targetChildrenItem = targetItem.parentNode.children;
-//     if(targetItem.nodeName == "LI") {
-//         ourHeadline.innerHTML = targetItem.innerHTML;
-//         for(let i = 0; i < targetChildrenItem.length; i++){
-//             targetChildrenItem[i].classList.remove("active");
-//             if(targetChildrenItem[i] == targetItem){
-//                 targetItem.classList.add("active");
-//                 deleteIndex = i;
-//                 continue;
-//             }
-//         }
-//         selectItem = targetItem;
-//     }
-// http://qaru.site/questions/11050/preview-an-image-before-it-is-uploaded
-// 
-
-// myBtnClass.addEventListener("change", addImage);
-
-
 function addImage(e){
 	// var URL = window.webkitURL || window.URL;
 	// var url = URL.createObjectURL(e.target.files[0])
@@ -57,3 +32,34 @@ function addOnlyImage(){
 	    inputPreview.src = "";
 	}   
 }
+//*********************************Slider*************
+const sliderPart = document.getElementById("slider-part");
+
+var slider = {
+    slides: ['6.jpg', '9.jpg', '20.jpg'],
+    frame:0,
+    set: function (image) {
+        sliderPart.style.backgroundImage = "url(images/" + image + ")";
+    },
+    init: function () {
+        this.set(this.slides[this.frame]);
+    },
+    left: function () {
+        this.frame--;
+        if(this.frame < 0) this.frame = this.slides.length -1;
+        this.set(this.slides[this.frame]);
+    },
+    right: function () {
+        this.frame++;
+        if(this.frame == this.slides.length) this.frame = 0;
+        this.set(this.slides[this.frame]);
+    }
+};
+window.onload = function () {
+    slider.init();
+    setInterval(function () {
+        slider.right();
+    }, 5000);
+};
+// http://qaru.site/questions/11050/preview-an-image-before-it-is-uploaded
+
