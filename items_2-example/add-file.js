@@ -3,15 +3,15 @@ const file = document.querySelector("#myfile");
 
 //*********************************Slider*************
 let sliderPart = document.getElementById("slider-part");
-let sliderNewImage = '93.jpg';
+let sliderNewImage = 'images/93.jpg';
 
 // TODO Add new render, after uploaded image.
 var slider = {
-    slides: ['6.jpg', '9.jpg', '20.jpg'],
+    slides: ['images/6.jpg', 'images/9.jpg', 'images/20.jpg'],
     //slides.push(sliderNewImage);
     frame:0,
     set: function (image) {
-        sliderPart.style.backgroundImage = "url(images/" + image + ")";
+        sliderPart.style.backgroundImage = `url(${image})`;
     },
     init: function () {
         this.slides.push(sliderNewImage);
@@ -70,14 +70,16 @@ function addOnlyImage(){
     let fileReader = inputBtn.files[0];
     var reader  = new FileReader();
 
-    reader.onloadend = function () {
-        inputPreview.src = reader.result;
+    reader.onloadend = function (result) {
+        inputPreview.src = result.target.result;
+        slider.slides.push(result.target.result);//использовать для слайдера только имейдж и листать его.->удалить бекграунд и заменить на Img
+        //console.log(inputPreview.src);//add to slider
     }
 
     if (fileReader) {
         reader.readAsDataURL(fileReader);
-        sliderNewImage = fileReader;
-        console.log(fileReader);
+        //sliderNewImage = fileReader;
+        //console.log(fileReader);
     } else {
         inputPreview.src = "";
     }
