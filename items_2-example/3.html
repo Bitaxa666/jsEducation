@@ -4,6 +4,51 @@
     <meta charset="UTF-8">
     <title>Slider-2</title>
 </head>
+<style>
+    #main{
+        position: relative;
+        margin: 100px auto;
+        padding: 5px;
+        width: 660px;
+        height: 360px;
+        background-color: silver;
+        border: 5px solid gray;
+        border-radius: 15px;
+    }
+    #slider-part {
+        margin: 20px auto;
+        width: 600px;
+        height: 320px;
+        margin-top: 20px;
+        background-color: white;
+        /*background-size: cover;*/
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+    button {
+        position: absolute;
+        top: 150px;
+        width: 25px;
+        height: 70px;
+        font: 12px arial, italic, sans-serif;
+        text-align: center;
+    }
+    .left{
+        left: 5px;
+    }
+    .right{
+        right: 5px;
+    }
+    #tt {
+        position: absolute;
+        display: block;
+        padding: 10px;
+        border: 1px solid #089dcb;
+        border-radius: 10px 10px 10px 0;
+        box-shadow: 1px 1px 2px #888888;
+        background-color: #ffffDD;
+    }
+</style>
 <body>
 <div class="preview-file">
     <input type="file" id="input-test-prev">
@@ -11,7 +56,14 @@
     <img id="img-test" src="" height="200" alt="Image preview...">
 </div>
 
+<div id="main">
+    <button class="lest" onclick="slider.left();"><</button>
+    <div id="slider-part"></div>
+    <button class="right" onclick="slider.right();">
+        >
+    </button>
+</div>
 
-<script src="add-file.js.js"></script>
+<script src="add-file.js"></script>
 </body>
 </html>
