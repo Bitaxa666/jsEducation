@@ -64,6 +64,41 @@
     </button>
 </div>
 
+<div class="form-input-example">
+    <h2>HTML Forms</h2>
+    <form>
+        Banner message:<br>
+        <!--<input id="message" type="text" name="message" size="12" onblur="validateNonEmpty(this, document.getElementById('message_help'))" />-->
+        <input id="message" type="text" name="message" size="32" onblur="validateLength(2, 32, this, document.getElementById('message_help'))" />
+        <span id="message_help" class="help"></span>
+        <br>
+        Enter ZIP code:<br>
+        <input id="zipcode" type="text" name="zipcode" size="10" onblur="validZipCode(this, document.getElementById('zipcode_help'))" />
+        <span id="zipcode_help" class="help"></span>
+        <br>
+        date for the message:<br>
+        <input type="text" id="date-message" name="date" size="10" onblur="validateDate(this, document.getElementById('date_help'))" />
+        <span id="date_help" class="help"></span>
+        <br>
+        Enter your name:<br>
+        <input type="text" id="name" name="name" onblur="validateNonEmpty(this, document.getElementById('name_help'))" />
+        <span id="name_help" class="help"></span>
+        <br>
+        Enter phone number:<br>
+        <input type="text" id="phone" name="phone" onblur="validatePhone(this, document.getElementById('phone_help'))" />
+        <span id="phone_help" class="help"></span>
+        <br>
+        Enter email:<br>
+        <input type="text" id="email" name="email" onblur="validateEmail(this, document.getElementById('email_help'))" />
+        <span id="email_help" class="help"></span>
+        <br><br>
+        <input type="button" value="Order Submit" onclick="placeOrder(this.form)">
+    </form>
+</div>
+
+<!--onblur - при уведении фокуса (лучше использовать до начала проверки данных)-вне зависимости от того было ли что то введенно,
+ onchange - уведение фокуса и изменения в валуе-->
+
 <script src="add-file.js"></script>
 </body>
 </html>

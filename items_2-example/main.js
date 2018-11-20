@@ -185,6 +185,111 @@ userBtnAdd.addEventListener("click", createNewUser);
 
 
 
+let img1 = ['1.png', '2.png', '3.png', '4.png', '5.png'];
+let img2 = [];
+
+// function containsItem(list){
+//     let lastItem = list.length-1;
+//     let emptyImg = [];
+//     for(let i = 0; i<list.length; i++) {
+//         emptyImg.push(list[i]);
+//         console.log(list);
+//         list.shift(i);
+//     }
+//     console.log(list);
+//     return emptyImg;
+// }
+
+// function newImage(listEmpty, listFull) {
+//     listFull.slice().forEach((value, index) => {
+//         listEmpty[index] = value;
+//         listFull.shift();
+//     });
+//     if(listEmpty.length == 5) {
+//         let listFullNew = listEmpty;
+//         //newImage(listEmpty, listFullNew);
+//         return listFullNew;
+//     }
+// }
+
+let myLogos = ['1.png', '2.png', '3.png', '4.png', '5.png'];
+
+
+
+let countOfImage = myLogos.length;
+// let counterNow;
+
+function showLocalValue() {
+    let counterNow = localStorage.getItem('sliderCounter');
+    if(counterNow == undefined) {
+        //Create new localStorage item
+        localStorage.setItem('sliderCounter', 0);
+        counterNow = localStorage.getItem('sliderCounter');
+        //document.write('<iframe src="'+myLogos[counterNow]+' "width="300" height="300" scrolling="no" frameborder="1"></iframe>');
+        console.log('if block' + counterNow);
+        localStorage.setItem('sliderCounter', ++counterNow);
+        console.log('if block-2' + counterNow);
+    } else {
+        if(counterNow < countOfImage) {
+            //document.write('<iframe src="'+myLogos[counterNow]+' "width="300" height="300" scrolling="no" frameborder="1"></iframe>');
+            localStorage.setItem('sliderCounter', ++counterNow);
+            console.log(counterNow);
+            console.log(myLogos[counterNow]);
+        } else {
+            //Create new localStorage item
+            counterNow = 0;
+            localStorage.setItem('sliderCounter', counterNow);
+            console.log("last else");
+        }
+    }
+}
+(function() {
+    let myLogos = ['1.png', '2.png', '3.png', '4.png', '5.png'];
+
+// let countOfImage = myLogos.length;
+// let counterNow;
+
+    function showLocalValue(listLogo) {
+        let countOfImage = listLogo.length;
+        let counterNow = localStorage.getItem('sliderCounter');
+
+        if (counterNow < countOfImage || counterNow != countOfImage) {
+            localStorage.setItem('sliderCounter', ++counterNow);
+        } else {
+            counterNow = 0;
+            localStorage.setItem('sliderCounter', ++counterNow);
+        }
+
+        // document.write(`<iframe src="${counterNow}" ""width=""300"" height=""300"" scrolling=""no"" frameborder=""1""></iframe>');
+        // const iframe = document.createElement("iframe");
+        // // iframe.src =
+        //
+        // document.body.appendChild(iframe);
+    }
+})()
+
+function newImage2(listConst, listFull) {
+    let arr2 = Array(listConst.length);
+    for(let i = 0; i<=listConst.length; i++) {
+        console.log(listFull);
+        listFull.shift();
+        if(listFull.length == 0) {
+            arr2 = listConst;
+            console.log('sorry')
+            //newImage(listEmpty, listFullNew);
+            return arr2;
+        }
+    }
+    console.log(listFull.length);
+    // if(listFull.length == 0) {
+    //     arr2 = listConst;
+    //     console.log('sorry')
+    //     //newImage(listEmpty, listFullNew);
+    //     return arr2;
+    // }
+}
+
+
 function createNewUser() {
 
     //allUsersList.push(new User)
@@ -447,3 +552,57 @@ function checkValidation() {
 // //const submitForm = document.getElementById("sign-in");
 // const formName = document.getElementById("valid-name");
 // const formEmail = document.getElementById("valid-email");
+
+//почитать про геттер-сеттер в JS... Если мы зададим _name как приватную, то работает а если нет, то рекурсия пример ниже
+// const vanya2 = {
+//     id: 12,
+//     _name: "Arnold",
+//     lastName: "Schwarz",
+//     email: "shwarz@gmail.com",
+//     year: 49,
+//     scores: {
+//         maths: 74,
+//         english: 63,
+//         science: 85
+//     },
+//     city: "Beijing",
+//     get fullName() { console.log(this);
+//         return this._name + " " + this.lastName;
+//     },
+//     /*
+//      Вопрос:Почему при вызове user2.fullName -> если есть сетер то нейм андефайнд????. Если закомитить сет, то будет все нормально...
+//      */
+//     set name(name1) {
+//         this._name = name1;
+//     },
+//
+//     get name() {
+//         return this._name;
+//     }
+// }
+// const vanya4 = {
+//     id: 12,
+//     name: "Arnold",
+//     lastName: "Schwarz",
+//     email: "shwarz@gmail.com",
+//     year: 49,
+//     scores: {
+//         maths: 74,
+//         english: 63,
+//         science: 85
+//     },
+//     city: "Beijing",
+//     get fullName() { console.log(this);
+//         return this.name + " " + this.lastName;
+//     },
+//     /*
+//      Вопрос:Почему при вызове user2.fullName -> если есть сетер то нейм андефайнд????. Если закомитить сет, то будет все нормально...
+//      */
+//     set name(name1) {
+//         this.name = name1;
+//     },
+//
+//     get name() {
+//         return this.name;
+//     }
+// }
