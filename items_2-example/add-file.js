@@ -63,3 +63,35 @@ window.onload = function () {
 };
 // http://qaru.site/questions/11050/preview-an-image-before-it-is-uploaded
 
+let myLogos = ['1.png', '2.png', '3.png', '4.png', '5.png'];
+
+// let countOfImage = myLogos.length;
+// let counterNow;
+
+function showLocalValue(listLogo) {
+	let countOfImage = listLogo.length;
+    let counterNow = localStorage.getItem('sliderCounter');
+    if(counterNow == undefined || counterNow == null) {
+        //****************Create new localStorage item
+        localStorage.setItem('sliderCounter', 0);      
+        counterNow = localStorage.getItem('sliderCounter'); 
+        console.log('if undefined ' + counterNow);   
+        //document.write('<iframe src="'+myLogos[counterNow]+' "width="300" height="300" scrolling="no" frameborder="1"></iframe>');  
+        console.log(myLogos[counterNow]);        
+        localStorage.setItem('sliderCounter', ++counterNow);
+    } else {
+        if(counterNow < countOfImage || counterNow != countOfImage) {            
+            console.log(counterNow);
+            //document.write('<iframe src="'+myLogos[counterNow]+' "width="300" height="300" scrolling="no" frameborder="1"></iframe>');
+            console.log(myLogos[counterNow]); 
+            localStorage.setItem('sliderCounter', ++counterNow);
+        } else {
+            //****************Create new localStorage item
+            counterNow = 0; 
+            console.log("last else " + counterNow);
+            //document.write('<iframe src="'+myLogos[counterNow]+' "width="300" height="300" scrolling="no" frameborder="1"></iframe>');
+            console.log("last else img " + myLogos[counterNow]);            
+            localStorage.setItem('sliderCounter', ++counterNow);          
+        }
+    }
+}
