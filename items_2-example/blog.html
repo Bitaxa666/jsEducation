@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My simple blog</title>
+</head>
+<!-- <body onload="showBlog(5);"> -->
+<body onload="loadBlog();">
+	<h3> My simple Blog</h3>
+	<input type="button" id="search" value="Search the Blog" onclick="searchBlog();" />
+	<input type="text" id="searchtext" name="searchtext" value="" />
+	<div class="blog" id="blog">
+	</div>
+	<input type="button" id="showall" value="Show All" onclick="showBlog();" />   
+	
+	<br >
+	<input type="button" id="random" value="Random Blog" onclick="randomBlog();" />
+   
+<script type="text/javascript" src="ajax.js"> </script>
+<script src="blog.js"></script>
+</body>
+</html>
