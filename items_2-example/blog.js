@@ -21,11 +21,11 @@
 // 	};
 // }
 
-// var blog = [new Blog("GOt the new cube I ordered..", new Date("08/14/2018")),
-// 			new Blog("Solved the new cube but ofcourse..", new Date("08/19/2018")),
-// 			new Blog("Managed to get a headache toiling..", new Date("08/16/2018")),
-// 			new Blog("Managed new news", new Date("08/27/2018"), "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p200x200/45474974_1384063911729934_2078027584372736000_n.jpg?_nc_cat=111&_nc_ht=scontent-waw1-1.xx&oh=87c2f2fa8a13b17bd9f4957bf17df964&oe=5C6D95FD"),
-// 			new Blog("Found a 7*7*7 cube for sale..", new Date("08/23/2018"))];
+var blog = [new Blog("GOt the new cube I ordered..", new Date("08/14/2018")),
+			new Blog("Solved the new cube but ofcourse..", new Date("08/19/2018")),
+			new Blog("Managed to get a headache toiling..", new Date("08/16/2018")),
+			new Blog("Managed new news", new Date("08/27/2018"), "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p200x200/45474974_1384063911729934_2078027584372736000_n.jpg?_nc_cat=111&_nc_ht=scontent-waw1-1.xx&oh=87c2f2fa8a13b17bd9f4957bf17df964&oe=5C6D95FD"),
+			new Blog("Found a 7*7*7 cube for sale..", new Date("08/23/2018"))];
 
 // Global array of blog entries
 //var blog = new Array();
@@ -75,7 +75,7 @@ function randomBlog() {
 }
 
 //***With class
-//как это создаетс только одна копия. так как для каждого так и создается свои методы для реализации обьекта?????
+//как это создаетс только одна копия. так как для каждого и так создается свои методы для реализации обьекта?????
 function Blog(body, date, image) {
 	this.body = body;
 	this.date = date;
@@ -162,15 +162,15 @@ Blog.blogSorter = function(blog1, blog2) {
 // 		showBlog(5);
 // 	}
 // }
- // Global array of blog entries
-  var blog = new Array();
-  // Global Ajax request
-  var ajaxReq = new AjaxRequest();
-  // Load the blog from an XML doc on the server using Ajax
-  function loadBlog() {
-    document.getElementById("blog").innerHTML = "<img src='wait.gif' alt='Loading...' />";
-    ajaxReq.send("GET", "blog.xml", handleRequest);
-  }
+ // // Global array of blog entries
+ //  var blog = new Array();
+ //  // Global Ajax request
+ //  var ajaxReq = new AjaxRequest();
+ //  // Load the blog from an XML doc on the server using Ajax
+ //  function loadBlog() {
+ //    document.getElementById("blog").innerHTML = "<img src='wait.gif' alt='Loading...' />";
+ //    ajaxReq.send("GET", "blog.xml", handleRequest);
+ //  }
 // Load the blog from an XML doc on the server using Ajax
   function loadBlog() {
     document.getElementById("blog").innerHTML = "<img src='https://raw.githubusercontent.com/KJlmfe/-Head-First-JavaScript-/master/ch12/wait.gif' alt='Loading...' />";
@@ -225,22 +225,22 @@ Blog.blogSorter = function(blog1, blog2) {
       // }
 
 
-// Get the text content of an HTML element
-  function getText(elem) {
-    var text = "";
-    if (elem) {
-      if (elem.childNodes) {
-        for (var i = 0; i < elem.childNodes.length; i++) {
-          var child = elem.childNodes[i];
-          if (child.nodeValue)
-            text += child.nodeValue;
-          else {
-            if (child.childNodes[0])
-              if (child.childNodes[0].nodeValue)
-                text += child.childNodes[0].nodeValue;
-          }
-        }
-      }
-    }
-    return text;
-  }
+// // Get the text content of an HTML element
+//   function getText(elem) {
+//     var text = "";
+//     if (elem) {
+//       if (elem.childNodes) {
+//         for (var i = 0; i < elem.childNodes.length; i++) {
+//           var child = elem.childNodes[i];
+//           if (child.nodeValue)
+//             text += child.nodeValue;
+//           else {
+//             if (child.childNodes[0])
+//               if (child.childNodes[0].nodeValue)
+//                 text += child.childNodes[0].nodeValue;
+//           }
+//         }
+//       }
+//     }
+//     return text;
+//   }
